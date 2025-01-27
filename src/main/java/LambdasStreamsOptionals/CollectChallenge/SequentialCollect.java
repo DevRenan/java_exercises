@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class Main {
+public class SequentialCollect {
     public static void main(String[] args) {
         List<String> sentences = List.of(
                 "Java is great",

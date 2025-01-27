@@ -1,26 +1,22 @@
 package LambdasStreamsOptionals.CollectChallenge;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ParalallelCollect {
     public static void main(String[] args) {
-        List<String> sentences = List.of(
-                "Java is great",
-                "I love programming in Java",
-                "Streams are powerful"
-        );
-        getSortedUniqueWordsEnhanced(sentences);
+        List<String> words = List.of("Java", "is", "fun", "powerful", "and", "It's", "the", "best", "programming", "language", "in","the","world!");
+
+        turnIntoSentence(words);
     }
 
-    private static void getSortedUniqueWordsV1(List<String> sentences) {
-        List<String> orderedUniqueList = sentences.stream()
-                .collect(HashSet<String>::new,(hashSet, s) -> hashSet.addAll(Arrays.stream(s.split(" ")).toList()) , HashSet::addAll)
-                .stream().sorted().collect(Collectors.toList());
-        System.out.println(orderedUniqueList);
+    private static void turnIntoSentence(List<String> words) {
+        String sentence = words.parallelStream().collect(StringBuilder::new, (sb, word) -> sb.append(word).append(" "), StringBuilder::append).toString();
+        System.out.println(sentence);
+    }
+    private static void turnIntoSentenceEnhanced(List<String> words) {
+        String sentence = words.parallelStream().collect(Collectors.joining(" "));
+        System.out.println(sentence);
     }
 
     private static void getSortedUniqueWordsEnhanced(List<String> sentences) {
